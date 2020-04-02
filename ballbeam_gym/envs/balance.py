@@ -32,7 +32,7 @@ class BallBeamBalanceEnv(BallBeamBaseEnv):
     action_mode : action space, str ['continuous', 'discrete']
     """
 
-    def __init__(self, timestep=0.1, beam_length=1.0, max_angle=0.2, 
+    def __init__(self, timestep=0.01, beam_length=1.08, max_angle=20*3.14/180, 
                  init_velocity=None, max_timesteps=100, action_mode='continuous'):
                  
         kwargs = {'timestep': timestep,
@@ -101,7 +101,7 @@ class VisualBallBeamBalanceEnv(VisualBallBeamBaseEnv):
     action_mode : action space, str ['continuous', 'discrete']
     """
 
-    def __init__(self, timestep=0.1, beam_length=1.0, max_angle=0.2, 
+    def __init__(self, timestep=0.01, beam_length=1.08, max_angle=20*3.14/180, 
                  init_velocity=None, max_timesteps=100, action_mode='continuous'):
 
         kwargs = {'timestep': timestep,

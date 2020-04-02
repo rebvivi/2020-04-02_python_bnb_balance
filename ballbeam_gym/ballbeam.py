@@ -34,12 +34,12 @@ class BallBeam():
     init_velocity : initial speed of ball, float (units/s)
     """
 
-    def __init__(self, timestep=0.05, beam_length=1.0, max_angle=0.2, init_velocity=0.0):
+    def __init__(self, timestep=0.01, beam_length=1.08, max_angle=20*3.14/180, init_velocity=0.0):
         self.dt = timestep                  # time step
         self.g = 9.82                       # gravity
-        self.r = 0.05                       # ball radius
+        self.r = 0.0159                       # ball radius
         self.L = beam_length                # beam length
-        self.I = 2/5*self.r**2              # solid ball inertia (omits mass)
+        self.I = (2/5*self.r**2 )             # solid ball inertia (omits mass)
         self.init_velocity = init_velocity  # initial velocity
         self.max_angle = max_angle          # max beam angle (rad)
         self.reset()
@@ -76,7 +76,7 @@ class BallBeam():
         theta = max(-self.max_angle, min(self.max_angle, angle))
         
         # store angle change for angular velocity
-        self.dtheta = theta - self.theta
+        self.dtheta = (theta - self.theta)
         self.theta = theta 
 
         if self.on_beam:
@@ -84,7 +84,7 @@ class BallBeam():
             y = self.y
 
             # dynamics on beam
-            self.v += -self.g/(1 + self.I)*sin(self.theta)*self.dt            
+            self.v +=  (x*self.dtheta*self.dtheta-self.g*sin(self.theta))*(5/7)*self.dt   
             self.x += self.v*self.dt
             self.y = self.r/cos(self.theta) + self.x*sin(self.theta)
 
